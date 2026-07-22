@@ -1,0 +1,28 @@
+Tempel kode ini di halaman dashboard pegawai, misalnya di:
+resources/views/pegawai/dashboard.blade.php
+
+@php
+    $saldoCuti = auth()->user()->saldo_cuti ?? 0;
+    $hakCuti = auth()->user()->hak_cuti ?? 0;
+@endphp
+
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <p class="mb-1 text-muted">Saldo Cuti Saat Ini</p>
+                <h3 class="mb-0">{{ $saldoCuti }} hari</h3>
+            </div>
+            <div class="text-end">
+                <small class="text-muted d-block">Hak cuti terkumpul</small>
+                <strong>{{ $hakCuti }} hari</strong>
+            </div>
+        </div>
+
+        @if($saldoCuti <= 0)
+            <div class="alert alert-warning mt-3 mb-0">
+                Anda belum memiliki saldo cuti. Pegawai baru mendapat 1 saldo cuti setelah genap 1 bulan bekerja.
+            </div>
+        @endif
+    </div>
+</div>

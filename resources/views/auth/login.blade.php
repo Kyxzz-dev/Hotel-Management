@@ -1,57 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card shadow-lg p-5 animate__animated animate__fadeIn"
-         style="max-width: 460px; width: 100%; height: auto; min-height: 540px;
-                background-color: rgba(255, 255, 255, 0.08);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border-radius: 20px;
-                border: 1px solid rgba(255, 255, 255, 0.2); color: white;">
+<div class="hotel-auth-page hotel-auth-page-single">
+    <div class="hotel-auth-bg hotel-auth-bg-lobby"></div>
+    <div class="hotel-auth-overlay"></div>
 
-        <div class="text-center mb-4">
-            <i class="fa fa-calendar-check fa-3x text-warning mb-3"></i>
-            <h4 class="fw-bold">Sistem Cuti Pegawai</h4>
-            <p class="text-light small">Login untuk mengakses dashboard Anda</p>
+    <div class="hotel-auth-single-shell">
+        <div class="hotel-auth-copy">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="hotel-brand-mark"><i class="fa fa-hotel"></i></div>
+                <div>
+                    <div class="hotel-brand-title">Mövenpick Jakarta City Centre</div>
+                    <div class="hotel-brand-subtitle">Internal Leave Management System</div>
+                </div>
+            </div>
+            <div class="hotel-auth-kicker mb-3"><i class="fa fa-sparkles me-2"></i>Hospitality Staff Portal</div>
+            <h1 class="hotel-auth-title mb-3">Sistem cuti internal untuk operasional hotel yang lebih rapi.</h1>
+            <p class="hotel-auth-desc mb-0">
+                Akses khusus HRD, Head Department, General Manager, dan Staff untuk pengajuan cuti, laporan, dan data karyawan lintas departemen hotel.
+            </p>
         </div>
 
-        @if(session('error'))
-            <div class="alert alert-danger text-light bg-danger bg-opacity-50 border-0">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login.post') }}" class="mt-4">
-            @csrf
-
+        <div class="hotel-auth-login-panel">
             <div class="mb-4">
-                <label class="form-label text-white"><i class="fa fa-envelope me-1"></i> Email</label>
-                <input type="email" name="email"
-                       class="form-control bg-light bg-opacity-10 border-0 text-white @error('email') is-invalid @enderror"
-                       value="{{ old('email') }}" required autofocus style="backdrop-filter: blur(2px);">
-                @error('email') <div class="invalid-feedback text-white">{{ $message }}</div> @enderror
+                <span class="hotel-auth-chip"><i class="fa fa-lock me-2"></i>Akses Internal Hotel</span>
+                <h3 class="fw-bold mt-3 mb-2 text-dark">Login Akun</h3>
+                <p class="text-muted mb-0">Masuk menggunakan akun yang dibuat oleh HRD atau pimpinan terkait.</p>
             </div>
 
-            <div class="mb-4">
-                <label class="form-label text-white"><i class="fa fa-lock me-1"></i> Password</label>
-                <input type="password" name="password"
-                       class="form-control bg-light bg-opacity-10 border-0 text-white @error('password') is-invalid @enderror"
-                       required style="backdrop-filter: blur(2px);">
-                @error('password') <div class="invalid-feedback text-white">{{ $message }}</div> @enderror
-            </div>
+            @if(session('success'))
+                <div class="alert alert-success"><i class="fa fa-circle-check me-1"></i>{{ session('success') }}</div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger"><i class="fa fa-triangle-exclamation me-1"></i>{{ session('error') }}</div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger"><i class="fa fa-triangle-exclamation me-1"></i>{{ $errors->first() }}</div>
+            @endif
 
-            <div class="d-grid mb-4">
-                <button type="submit" class="btn btn-warning fw-semibold text-dark py-2">
-                    <i class="fa fa-sign-in-alt me-1"></i> Masuk Sekarang
+            <form method="POST" action="{{ route('login.post') }}" class="mt-4">
+                @csrf
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-dark"><i class="fa fa-envelope me-1 text-warning"></i>Email Akun</label>
+                    <input type="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" value="{{ old('email') }}" required autofocus placeholder="contoh@hotel.com">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-dark"><i class="fa fa-key me-1 text-warning"></i>Password</label>
+                    <input type="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" required placeholder="Masukkan password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 mt-2 hotel-auth-submit hotel-auth-next-btn">
+                    <i class="fa fa-right-to-bracket me-2"></i>Login
                 </button>
-            </div>
+            </form>
 
-            <p class="text-center small text-light mb-0">
-                Belum punya akun?
-                <a href="{{ route('register') }}" class="text-warning fw-semibold">Daftar sekarang</a>
-            </p>
-        </form>
+            <div class="hotel-auth-note mt-4">
+                <div class="d-flex gap-3 align-items-start">
+                    <div class="hotel-auth-note-icon"><i class="fa fa-circle-info"></i></div>
+                    <div>
+                        <div class="fw-bold text-dark">Registrasi publik dinonaktifkan</div>
+                        <small class="text-muted">Akun dibuat melalui HRD atau akun pimpinan yang memiliki akses kelola staff.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

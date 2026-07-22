@@ -1,0 +1,35 @@
+Tambahkan di bagian atas file CutiController.php:
+
+use App\Services\LeaveBalanceService;
+use Carbon\Carbon;
+
+Lalu tempel kode ini di AWAL method store(Request $request), sebelum data cuti disimpan ke database:
+
+$user = auth()->user();
+
+$requestedDays = (int) $request->input('jumlah_hari', 0);
+
+if ($requestedDays <= 0) {
+    $start = $request->input('tanggal_mulai')
+        ?: $request->input('tgl_mulai')
+        ?: $request->input('mulai_cuti')
+        ?: $request->input('start_date');
+
+    $end = $request->input('tanggal_selesai')
+        ?: $request->input('tgl_selesai')
+        ?: $request->input('selesai_cuti')
+        ?: $request->input('end_date');
+
+    if ($start && $end) {
+        $requestedDays = Carbon::parse($start)->startOfDay()
+            ->diffInDays(Carbon::parse($end)->startOfDay()) + 1;
+    }
+}
+
+$leaveBalance = app(LeaveBalanceService::class)->canRequest($user, max(1, $requestedDays));
+
+if (!$leaveBalance['allowed']) {
+    return back()
+        ->withInput()
+        ->with('error', $leaveBalance['message']);
+}

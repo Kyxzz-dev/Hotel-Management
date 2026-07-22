@@ -6,7 +6,7 @@
         <div class="text-center mb-4">
             <i class="fa fa-user-plus fa-3x text-success mb-2"></i>
             <h4 class="fw-bold">Daftar Akun</h4>
-            <p class="text-muted small">Lengkapi formulir untuk mendaftar akun baru.</p>
+            <p class="text-muted small">Lengkapi formulir untuk mendaftar akun staff sebagai pengaju cuti.</p>
         </div>
 
         <form method="POST" action="{{ route('register') }}">

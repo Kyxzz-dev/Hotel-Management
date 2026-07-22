@@ -1,0 +1,16 @@
+Buka file app/Console/Kernel.php.
+
+Cari bagian:
+
+protected $commands = [
+];
+
+Ubah menjadi:
+
+protected $commands = [
+    \App\Console\Commands\CheckLeaveBalances::class,
+];
+
+Jika di dalam array sudah ada command lain, cukup tambahkan baris ini saja:
+
+\App\Console\Commands\CheckLeaveBalances::class,

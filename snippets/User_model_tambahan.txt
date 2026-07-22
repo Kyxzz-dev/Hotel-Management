@@ -1,0 +1,15 @@
+Tambahkan di bagian atas app/Models/User.php:
+
+use App\Services\LeaveBalanceService;
+
+Lalu tempel method ini di dalam class User, sebelum kurung penutup class terakhir:
+
+public function getSaldoCutiAttribute(): int
+{
+    return app(LeaveBalanceService::class)->balance($this);
+}
+
+public function getHakCutiAttribute(): int
+{
+    return app(LeaveBalanceService::class)->earnedLeaveDays($this);
+}

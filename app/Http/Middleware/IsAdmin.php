@@ -14,8 +14,8 @@ class IsAdmin
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'Akses khusus admin.');
+        if (!in_array(Auth::user()->role, ['head_department', 'gm'])) {
+            abort(403, 'Akses khusus Head Department dan GM.');
         }
 
         return $next($request);

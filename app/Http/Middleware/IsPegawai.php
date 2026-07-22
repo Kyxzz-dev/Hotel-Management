@@ -14,8 +14,8 @@ class IsPegawai
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        if (Auth::user()->role !== 'pegawai') {
-            abort(403, 'Akses khusus pegawai.');
+        if (Auth::user()->role !== 'staff') {
+            abort(403, 'Akses khusus staff.');
         }
 
         return $next($request);

@@ -11,10 +11,27 @@ class Cuti extends Model
 
     protected $fillable = [
         'user_id',
+        'pegawai_id',
+        'nama',
+        'jenis_cuti',
         'tanggal_mulai',
         'tanggal_selesai',
+        'jumlah_hari',
         'alasan',
         'status',
+
+        'position',
+        'department',
+        'last_day_of_work',
+        'first_day_of_work',
+        'entitlement',
+        'balance_before',
+        'request_day',
+        'balance_after',
+        'person_in_charge',
+        'remarks',
+        'approved_at',
+        'rejected_at',
     ];
 
     public function pegawai()
