@@ -228,6 +228,7 @@
                             <th>Jenis Cuti</th>
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
+                            <th>Lampiran</th>
                             <th>Jumlah Hari</th>
                             <th>Last Day of Work</th>
                             <th>First Day of Work</th>
@@ -264,6 +265,16 @@
 
                                     <td>
                                         {{ $cuti->tanggal_selesai ? \Carbon\Carbon::parse($cuti->tanggal_selesai)->format('d M Y') : '-' }}
+                                    </td>
+
+                                    <td class="text-center">
+                                    @if($cuti->attachment)
+                                        <a href="{{ asset('storage/' . $cuti->attachment) }}" target="_blank" class="btn btn-sm btn-outline-primary" title="Download Lampiran">
+                                            <i class="fa fa-file me-1"></i> Lihat
+                                        </a>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
                                     </td>
 
                                     <td>

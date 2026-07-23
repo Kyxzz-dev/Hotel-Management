@@ -45,7 +45,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('pegawai.cuti.store') }}" method="POST" id="leaveForm">
+                <form action="{{ route('pegawai.cuti.store') }}" method="POST" id="leaveForm" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row g-3">
@@ -182,6 +182,23 @@
                             @error('remarks')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        {{-- Attachment (Wajib) --}}
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Lampiran Surat <span class="text-danger">*</span></label>
+                            <input type="file"
+                                   name="attachment"
+                                   class="form-control @error('attachment') is-invalid @enderror"
+                                   accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                                   required>
+                            @error('attachment')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text text-danger">
+                                <i class="fa fa-asterisk me-1"></i>
+                                Format: PDF, JPG, JPEG, PNG, DOC, DOCX (Max 2MB) - <strong>Wajib diisi</strong>
+                            </div>
                         </div>
 
                     </div>

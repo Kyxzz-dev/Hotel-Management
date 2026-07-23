@@ -104,6 +104,7 @@
                             <th>Balance After</th>
                             <th>Alasan</th>
                             <th>Remarks</th>
+                            <th>Lampiran</th>
                             <th>Status</th>
                             <th>Diajukan</th>
                             <th>Disetujui Pada</th>
@@ -168,6 +169,16 @@
                                     {{ $cuti->remarks ?? '-' }}
                                 </td>
 
+                                <td class="text-center">
+                                    @if($cuti->attachment)
+                                        <a href="{{ asset('storage/' . $cuti->attachment) }}" target="_blank" class="btn btn-sm btn-outline-primary" title="Download Lampiran">
+                                            <i class="fa fa-file me-1"></i> Lihat
+                                        </a>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </td>
+
                                 <td data-search="{{ $cuti->status }}" data-order="{{ $cuti->status }}">
                                     @include('partials.status-badge', ['status' => $cuti->status])
                                 </td>
@@ -210,6 +221,11 @@
     .remarks-cell {
         min-width: 220px;
     }
+
+    .attachment-cell {
+        min-width: 100px;
+        white-space: nowrap;
+    }
 </style>
 @endpush
 
@@ -242,7 +258,7 @@
                 document.querySelectorAll('[data-filter-status]').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const value = button.dataset.filterStatus;
-                table.column(14).search(value ? '^' + value + '$' : '', true, false).draw();
+                table.column(15).search(value ? '^' + value + '$' : '', true, false).draw();
             });
         });
     });

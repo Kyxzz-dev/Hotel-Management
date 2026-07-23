@@ -49,6 +49,7 @@ class CutiController extends Controller
             'first_day_of_work' => 'nullable|date',
             'person_in_charge' => 'nullable|string|max:255',
             'remarks' => 'nullable|string',
+            'attachment' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
             'alasan' => 'required|string',
         ]);
 
@@ -110,6 +111,9 @@ class CutiController extends Controller
 
             'person_in_charge' => $request->person_in_charge,
             'remarks' => $request->remarks,
+
+            // Handle attachment upload
+            'attachment' => $request->hasFile('attachment') ? $request->file('attachment')->store('attachments', 'public') : null,
 
             'status' => 'pending',
             'approved_at' => null,

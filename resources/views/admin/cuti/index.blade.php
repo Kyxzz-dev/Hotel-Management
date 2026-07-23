@@ -97,6 +97,7 @@
                             <th>Jenis Cuti</th>
                             <th>Mulai</th>
                             <th>Selesai</th>
+                            <th>Lampiran</th>
                             <th>Jumlah Hari</th>
                             <th>Last Day of Work</th>
                             <th>First Day of Work</th>
@@ -142,7 +143,15 @@
                                 <td>
                                     {{ $cuti->tanggal_selesai ? \Carbon\Carbon::parse($cuti->tanggal_selesai)->format('d M Y') : '-' }}
                                 </td>
-
+                                <td class="text-center">
+                                    @if($cuti->attachment)
+                                        <a href="{{ asset('storage/' . $cuti->attachment) }}" target="_blank" class="btn btn-sm btn-outline-primary" title="Download Lampiran">
+                                            <i class="fa fa-file me-1"></i> Lihat
+                                        </a>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </td>    
                                 <td>
                                     {{ $cuti->jumlah_hari ?? $cuti->request_day ?? '-' }}
                                 </td>
@@ -182,7 +191,7 @@
                                 <td class="remarks-cell">
                                     {{ $cuti->remarks ?? '-' }}
                                 </td>
-
+                                
                                 <td class="status-cell" data-search="{{ $cuti->status }}" data-order="{{ $cuti->status }}">
                                     @include('partials.status-badge', ['status' => $cuti->status])
                                 </td>
@@ -255,6 +264,11 @@
         min-width: 180px;
         white-space: nowrap;
     }
+
+    .attachment-cell {
+        min-width: 100px;
+        white-space: nowrap;
+    }
 </style>
 @endpush
 
@@ -287,7 +301,7 @@
                 document.querySelectorAll('[data-filter-status]').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const value = button.dataset.filterStatus;
-                table.column(17).search(value ? '^' + value + '$' : '', true, false).draw(false);
+                table.column(19).search(value ? '^' + value + '$' : '', true, false).draw(false);
             });
         });
 

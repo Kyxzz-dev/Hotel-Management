@@ -30,6 +30,7 @@ class Cuti extends Model
         'balance_after',
         'person_in_charge',
         'remarks',
+        'attachment',
         'approved_at',
         'rejected_at',
     ];
@@ -37,5 +38,10 @@ class Cuti extends Model
     public function pegawai()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getAttachmentUrlAttribute()
+    {
+        return $this->attachment ? asset('storage/' . $this->attachment) : null;
     }
 }
