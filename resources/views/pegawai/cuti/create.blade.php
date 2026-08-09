@@ -186,7 +186,7 @@
 
                         {{-- Attachment (Wajib) --}}
                         <div class="col-12">
-                            <label class="form-label fw-bold">Lampiran Surat <span class="text-danger">*</span></label>
+                            <label class="form-label fw-bold">Lampiran <span class="text-danger">*</span></label>
                             <input type="file"
                                    name="attachment"
                                    class="form-control @error('attachment') is-invalid @enderror"
@@ -197,7 +197,7 @@
                             @enderror
                             <div class="form-text text-danger">
                                 <i class="fa fa-asterisk me-1"></i>
-                                Format: PDF, JPG, JPEG, PNG, DOC, DOCX (Max 2MB) - <strong>Wajib diisi</strong>
+                                Format: PDF, JPG, JPEG, PNG, DOC, DOCX (Max 2MB)
                             </div>
                         </div>
 
