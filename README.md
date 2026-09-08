@@ -138,13 +138,6 @@ Proyek ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/M
 
 ---
 
-## 🤝 Kontribusi
-
-Silakan fork, pull request, atau ajukan issue melalui:
-👉 https://github.com/ilyasdwisantoso/cuti-pegawai
-
----
-
 ## 👨‍💻 Author
 
-Made with ❤️ by [@ilyasdwisantoso](https://github.com/ilyasdwisantoso)
+Made with Workspace @2026
